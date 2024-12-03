@@ -1,3 +1,5 @@
+import {cart} from '../data/cart.js';
+
 let productHTML = '';
 
 // loop through every product obect inside product array
