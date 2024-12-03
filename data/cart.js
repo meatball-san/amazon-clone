@@ -24,3 +24,15 @@ export function addToCart(productId) {
     cart.push({productId, quantity: 1});
   }
 }
+
+// delete product from cart
+export function removeFromCart(productId) {
+  // loop through each item in cart
+  // if cartItem productId matches delete productId
+  // remove the index aka product from the cart
+  cart.forEach((cartItem, index) => {
+    if (cartItem.productId === productId) {
+      cart.splice(index, 1);
+    }
+  })
+}
