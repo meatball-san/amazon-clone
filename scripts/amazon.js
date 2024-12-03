@@ -1,4 +1,4 @@
-import {cart} from '../data/cart.js';
+import {cart, addToCart} from '../data/cart.js';
 import {products} from '../data/products.js';
 
 let productHTML = '';
@@ -61,6 +61,21 @@ products.forEach((item) => {
 // show HTML in the variable onto the page
 document.querySelector('.js-product-grid').innerHTML = productHTML;
 
+// update cart quantity
+function updateCartQuantity() {
+  // show cartQuantity on the page
+  // loop through each item in the cart
+  // save their quantity in cartQuantity
+  // display it on page
+  let cartQuantity = 0;
+  
+  cart.forEach((cartItem) => {
+    cartQuantity += cartItem.quantity;
+  })
+  
+  document.querySelector('.js-cart-quantity').innerHTML = cartQuantity;
+}
+
 // select all "Add to Cart" buttons
 // add eventListener to update cart items
 document.querySelectorAll('.js-add-to-cart').forEach((button) => {
@@ -68,33 +83,11 @@ document.querySelectorAll('.js-add-to-cart').forEach((button) => {
     // get the productId of the button clicked
     // save it in a variable
     const productId = button.dataset.productId;
-    
-    // check if item already exists in cart
-    // if it does, increase quantity of the product
-    // if not, push the object
-    let matchProduct;
-    cart.forEach((item) => {
-      if (productId === item.productId) {
-        matchProduct = item;
-      }
-    });
 
-    if (matchProduct) {
-      matchProduct.quantity += 1;
-    } else {
-      cart.push({productId, quantity: 1});
-    }
+    // add product to cart
+    addToCart(productId);
 
-    // show cartQuantity on the page
-    // loop through each item in the cart
-    // save their quantity in cartQuantity
-    // display it on page
-    let cartQuantity = 0;
-
-    cart.forEach((item) => {
-      cartQuantity += item.quantity;
-    })
-
-    document.querySelector('.js-cart-quantity').innerHTML = cartQuantity;
+    // update quantity within cart
+    updateCartQuantity();
   });
 });
