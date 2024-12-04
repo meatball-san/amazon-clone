@@ -1,4 +1,4 @@
-import {cart, addToCart} from '../data/cart.js';
+import {cart, addToCart, getCartItemQuantity} from '../data/cart.js';
 import {products} from '../data/products.js';
 import {formatCurrency} from './utils/money.js';
 
@@ -68,11 +68,7 @@ function updateCartQuantity() {
   // loop through each item in the cart
   // save their quantity in cartQuantity
   // display it on page
-  let cartQuantity = 0;
-  
-  cart.forEach((cartItem) => {
-    cartQuantity += cartItem.quantity;
-  })
+  const cartQuantity = getCartItemQuantity();
   
   document.querySelector('.js-cart-quantity').innerHTML = cartQuantity;
 }
