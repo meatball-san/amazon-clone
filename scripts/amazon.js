@@ -39,7 +39,7 @@ export function renderProductsGrid() {
             </div>
 
             <div class="product-quantity-container">
-              <select>
+              <select class="js-select" data-product-id="${item.id}">
                 <option selected value="1">1</option>
                 <option value="2">2</option>
                 <option value="3">3</option>
@@ -89,9 +89,16 @@ export function renderProductsGrid() {
       // get the productId of the button clicked
       // save it in a variable
       const productId = button.dataset.productId;
+      let selectQuantity;
 
+      document.querySelectorAll('.js-select').forEach(select => {
+        if (productId === select.dataset.productId) {
+          selectQuantity = select.value;
+        }
+      })
+      
       // add product to cart
-      addToCart(productId);
+      addToCart(productId, selectQuantity);
 
       // update quantity within cart
       updateCartQuantity();

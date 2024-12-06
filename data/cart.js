@@ -18,7 +18,7 @@ export function loadFromStorage() {
 }
 
 // adding products quantity to cart
-export function addToCart(productId) {
+export function addToCart(productId, selectQuantity) {
   // check if item already exists in cart
   // if it does, increase quantity of the product
   // if not, push the object
@@ -30,9 +30,9 @@ export function addToCart(productId) {
   });
   
   if (matchProduct) {
-    matchProduct.quantity += 1;
+    matchProduct.quantity += Number(selectQuantity);
   } else {
-    cart.push({productId, quantity: 1, deliverOptionId: '1'});
+    cart.push({productId, quantity: Number(selectQuantity), deliverOptionId: '1'});
   }
 
   saveToStorage();

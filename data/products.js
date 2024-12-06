@@ -60,7 +60,6 @@ export function loadProductsFetch() {
           return new Clothing(productDetails);
       return new Product(productDetails);
     });
-    console.log('fetch products');
   });
 }
 
@@ -73,8 +72,7 @@ export function loadProducts(fun) {
           return new Clothing(productDetails);
       return new Product(productDetails);
     });
-
-    console.log('load products');
+    
     fun();
   });
 
