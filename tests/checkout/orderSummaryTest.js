@@ -25,6 +25,7 @@ describe('test suit: renderOrderSummary', () => {
         <div class="js-checkout-header"></div>
         `;
 
+        spyOn(localStorage, 'setItem');
         spyOn(localStorage, 'getItem').and.callFake(() => {
             return JSON.stringify([
                 {
