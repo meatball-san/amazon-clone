@@ -1,17 +1,16 @@
 import { orders } from '../data/orders.js';
-import { products } from '../data/products.js';
 import { loadProductsFetch } from '../data/products.js';
 import { renderAmazonHeader } from './amazonHeader.js';
 import dayjs from 'https://unpkg.com/dayjs@1.11.10/esm/index.js';
 import { formatCurrency } from './utils/money.js';
 import { getProduct } from '../data/products.js';
+import { addToCart } from '../data/cart.js';
 
 renderAmazonHeader();
 
 async function renderOrders() {
     await loadProductsFetch();
     let orderContainerHTML = '';
-    console.log(orders);
     
     orders.forEach(orderObject => {
         const today = dayjs();
@@ -67,7 +66,7 @@ async function renderOrders() {
                             Quantity: ${product.quantity}
                         </div>
     
-                        <button class="buy-again-button button-primary">
+                        <button class="buy-again-button button-primary js-buy-again-button" data-product-id=${matchingProduct.id}>
                             <img class="buy-again-icon" src="images/icons/buy-again.png">
                             <span class="buy-again-message">Buy it again</span>
                         </button>
@@ -89,6 +88,14 @@ async function renderOrders() {
     });
 
     document.querySelector('.js-order-grid').innerHTML = orderContainerHTML;
+
+    document.querySelectorAll('.js-buy-again-button').forEach((button) => {
+        button.addEventListener('click', () => {
+            const productId = button.dataset.productId;
+            addToCart(productId, 1);
+            renderAmazonHeader();
+        })
+    })
 }
 
 renderOrders();
