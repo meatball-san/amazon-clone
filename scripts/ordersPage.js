@@ -42,11 +42,12 @@ async function renderOrders() {
         </div>
         `;
 
-
         function productList(orderObject){
             let ordersHTML = '';
             orderObject.products.forEach(product => {
                 const matchingProduct = getProduct(product.productId);
+                const estimatedDeliveryTime = dayjs(product.estimatedDeliveryTime);
+                const formatEstimatedDeliveryTime = estimatedDeliveryTime.format('MMMM D');
                 ordersHTML += `
                     <div class="product-image-container">
                         <img src=${matchingProduct.image}>
@@ -59,7 +60,7 @@ async function renderOrders() {
                         </div>
     
                         <div class="product-delivery-date">
-                            Arriving on: ${product.estimateDeliveryTime}
+                            Arriving on: ${formatEstimatedDeliveryTime}
                         </div>
     
                         <div class="product-quantity">
