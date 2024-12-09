@@ -95,8 +95,8 @@ async function renderOrders() {
             const productId = button.dataset.productId;
             addToCart(productId, 1);
             renderAmazonHeader();
-        })
-    })
+        });
+    });
 }
 
 renderOrders();
